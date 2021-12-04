@@ -1,0 +1,14 @@
+* How will you test the changes?
+
+We can test changes in test environment. Test environment means we should create another cluster with the same configuration as production.
+In real world we can do canary testing by splitting some production traffic to the test environment with a load balancer configuration.
+In our project it is not possible to test simulate directing traffic to test environment.
+Without production traffic we can create load data by ourselves and make production like load to test environment.
+
+
+* How will you ensure the changes don't negatively affect your cluster?
+
+We should also monitor different metrics using observability and monitoring techniques with Prometheus and Grafana for example.
+The monitoring should be done before we apply changes and after, so we can reflect if something goes wrong.
+
+We should ensure that we are using version control like git to be able to rollback the changes.
