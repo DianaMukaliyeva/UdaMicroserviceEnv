@@ -18,11 +18,16 @@ Vagrant.configure("2") do |config|
 
       # set the static IP for the vagrant box
       node.vm.network "private_network", ip: "192.168.50.10#{i}"
+      node.vm.network "forwarded_port", guest: 8080, host: 3002   # http
+      node.vm.network "forwarded_port", guest: 9090, host: 9090
+      node.vm.network "forwarded_port", guest: 9376, host: 9376
+      node.vm.network "forwarded_port", guest: 3000, host: 3000
       # configure the parameters for VirtualBox provider
       node.vm.provider "virtualbox" do |v|
+        v.gui = true
         v.name = "node#{i}"
-        v.memory = 2048
-        v.cpus = 2
+        v.memory = 4096
+        v.cpus = 4
       end
 
     config.vm.provision "shell", inline: <<-SHELL
